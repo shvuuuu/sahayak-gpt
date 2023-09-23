@@ -7,14 +7,14 @@ import fitz
 from model import search
 from PIL import Image
 
-OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 openai.api_key = OPENAI_API_KEY
 
-st.set_page_config(page_title="LlamaDoc", page_icon="📁", layout="wide")
+st.set_page_config(page_title="Team Ocean Astronauts", page_icon="📁", layout="wide")
 
 st.markdown(
-    '<p style="display:inline-block;font-size:40px;font-weight:bold;">🦙LlamaDoc </p> <p style="display:inline-block;font-size:16px;">With LlamaIndex&#39;s in-context learning approach, LlamaDoc leverages the reasoning capabilities of LLMs to provide accurate and insightful responses from a PDF file. <br><br></p>',
+    '<p style="display:inline-block;font-size:40px;font-weight:bold;">Team Ocean Astronauts</p> <p style="display:inline-block;font-size:16px;">With LlamaIndex&#39;s in-context learning approach, LlamaDoc leverages the reasoning capabilities of LLMs to provide accurate and insightful responses from a PDF file. <br><br></p>',
     unsafe_allow_html=True,
 )
 
