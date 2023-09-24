@@ -1,9 +1,7 @@
 import streamlit as st
 import openai
 import os
-import time
 from model import search
-import random
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
