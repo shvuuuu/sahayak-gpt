@@ -1,2 +1,4 @@
 data/crpf_act1949_2[1][1].pdf
 .streamlit/secrets.toml
+__pycache__/model.cpython-310.pyc
+data/

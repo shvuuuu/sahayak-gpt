@@ -1,11 +1,9 @@
 import streamlit as st
-import urllib
-import base64
 import openai
 import os
-import fitz
+import time
 from model import search
-from PIL import Image
+import random
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
@@ -24,40 +22,30 @@ def save_uploadedfile(uploaded_file):
         file.write(uploaded_file.getbuffer())
     return st.success("Saved File: {} to directory".format(uploaded_file.name))
 
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+    
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-@st.cache_data
-def display_pdf(file):
-    with open(file, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
+if prompt := st.chat_input("How Can I Help You Today"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-    pdf_data = base64.b64decode(base64_pdf)
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        with st.spinner('Thinking...'):
+            result = search(prompt)
+            message_placeholder = st.empty()
+            full_response = result
+            message_placeholder.markdown(full_response)
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": result})
 
-    doc = fitz.open(stream=pdf_data, filetype="pdf")
-
-    for page in doc:
-        pix = page.get_pixmap()
-        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-        st.image(img)
-
-    doc.close()
-
-
-uploaded_pdf = st.file_uploader("Upload your PDF", type=["pdf"])
-
-if uploaded_pdf is not None:
-    col1, col2 = st.columns([3, 2])
-    with col1:
-        input_file = save_uploadedfile(uploaded_pdf)
-        pdf_file = "data/" + uploaded_pdf.name
-        pdf_view = display_pdf(pdf_file)
-    with col2:
-        query_search = st.text_area("Search your query:")
-        if st.checkbox("Search"):
-            st.info("Your query: " + query_search)
-            st.text("Please wait...")
-            result = search(query_search)
-            st.write("🤖: ")
-            st.write(result)
 
 hide_st_style = """
     <style>
