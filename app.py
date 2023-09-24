@@ -40,8 +40,10 @@ if prompt := st.chat_input("How Can I Help You Today"):
             fr = str(full_response)
             t_response = translator.translate(fr, dest=src_lang)
             bot_response = t_response.text
-            message_placeholder.markdown(bot_response)
-    st.session_state.messages.append({"role": "assistant", "content": result})
+            br = str(bot_response)
+            final_response = br + "\n" + fr
+            message_placeholder.markdown(final_response)
+    st.session_state.messages.append({"role": "assistant", "content": final_response})
 
 hide_st_style = """
     <style>
