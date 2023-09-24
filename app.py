@@ -9,10 +9,10 @@ openai.api_key = OPENAI_API_KEY
 
 translator = Translator()
 
-st.set_page_config(page_title="Team Ocean Astronauts", page_icon="📁", layout="wide")
+st.set_page_config(page_title="SAHAYAK-GPT", page_icon="🏛️", layout="wide")
 
 st.markdown(
-    '<p style="display:inline-block;font-size:40px;font-weight:bold;">Team Ocean Astronauts</p> <p style="display:inline-block;font-size:16px;">With LlamaIndex&#39;s in-context learning approach, LlamaDoc leverages the reasoning capabilities of LLMs to provide accurate and insightful responses from a PDF file. <br><br></p>',
+    '<p style="display:inline-block;font-size:40px;font-weight:bold;">SAHAYAK-GPT🏛️    </p> <p style="display:inline-block;font-size:16px;">-by TEAM OCEAN ASTRONAUTS</p> <p style="display:inline-block;font-size:16px;">"Hello, Im SAHAYAK-GPT, your government AI chatbot, here to assist you with information, services, and answers to your questions 24/7. How can I help you today"<br><br></p>',
     unsafe_allow_html=True,
 )
 
